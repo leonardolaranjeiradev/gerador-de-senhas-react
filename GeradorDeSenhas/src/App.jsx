@@ -20,12 +20,20 @@ function App() {
 
     let senha = "";
 
-    for(let i = 0; i < tamanho; i++) {
-      let indice = Math.floor(Math.random() * todos.length);
-      senha += todos[indice];
+    if (tamanho <= 20) {
+        for(let i = 0; i < tamanho; i++) {
+        let indice = Math.floor(Math.random() * todos.length);
+        senha += todos[indice];
+      }
+      setSenha(senha);  
+    } else {
+      alert("O limite máximo permitido é 20 caracteres.");
+      setTamanho("");
     }
-    setSenha(senha);  
+
   }
+
+    
 
 
   return (
@@ -70,4 +78,4 @@ function App() {
   
 }
 
-export default App
+export default App 
