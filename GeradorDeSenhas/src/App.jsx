@@ -41,6 +41,13 @@ function App() {
             type="number"
             placeholder="Digite a quantidade"
             onChange={(e) => setTamanho(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+              gerarSenha(tamanho);
+              }
+            }}
+
+
             />
 
             <div>     
