@@ -7,6 +7,9 @@ function App() {
 
   const [tamanho, setTamanho] = useState("");
   const [senha, setSenha] = useState("");
+  const [semNumeros, setSemNumeros] = useState(false);
+  const [semLetras, setSemLetras] = useState(false);
+  const [semEspeciais, setSemEspeciais] = useState(false);
   
   function gerarSenha(tamanho) {
 
@@ -16,9 +19,25 @@ function App() {
     let minusculas = "abcdefghijklmnopqrstuvwxyz";
     let maiusculas = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    let todos = numeros + simbolos + maiusculas + minusculas;
-
+    let todos = "";
     let senha = "";
+
+    if (!semNumeros) {
+      todos += numeros;
+    }
+
+    if (!semLetras) {
+      todos += maiusculas + minusculas;
+    }
+    
+    if (!semEspeciais) {
+      todos += simbolos;
+    }
+
+    if (todos === "") {
+      alert("Selecione pelo menos um tipo de caractere.");
+      return;
+    }
 
     if (tamanho <= 20) {
         for(let i = 0; i < tamanho; i++) {
@@ -32,9 +51,6 @@ function App() {
     }
 
   }
-
-    
-
 
   return (
     <div className="flex flex-col h-lvh flex justify-center items-center">
@@ -54,25 +70,49 @@ function App() {
               gerarSenha(tamanho);
               }
             }}
-
-
             />
 
             <div>     
             <Button onClick={() => gerarSenha(tamanho)}>Gerar</Button>
-            </div> 
+            </div>
+          </div> 
 
-          </div>     
-
+         
           <div className="mt-4">
             <p className="bg-red-100 rounded-lg p-2 text-red-700"><strong>{senha}</strong></p>
-          </div>
-        
-        </div>       
+          </div>       
+        </div>    
 
-          
-            
+        <label>
+          <input
+            type="checkbox"
+            checked={semNumeros}
+            onChange={(e) => setSemNumeros(e.target.checked)}
+          />
+          Sem números
+        </label>
+
+        <label>
+          <input
+            type="checkbox"
+            checked={semLetras}
+            onChange={(e) => setSemLetras(e.target.checked)}
+          />
+          Sem letras
+        </label>
+
+        <label>
+          <input
+            type="checkbox"
+            checked={semEspeciais}
+            onChange={(e) => setSemEspeciais(e.target.checked)}
+          />
+          Sem especiais
+        </label>
+
     </div>
+  
+    
   );
 
   
